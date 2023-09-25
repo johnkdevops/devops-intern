@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world-deployment
+  name: hello-world-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-deployment
+  template:
+    metadata:
+      labels:
+        app: hello-world-deployment
+    spec:
+      containers:
+      - resources:
+          limits:
+            cpu: "1"
+            memory: "256Mi"
+        image: presjkit/hello-world-express-nodejs:v1
+        name: hello-world-nodejs
+        ports:
+        - containerPort: 3000
