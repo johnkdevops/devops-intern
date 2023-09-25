@@ -1,9 +1,12 @@
 # Ignore compiled binaries
 *.exe
 *.dll
+*.so
 
 # Ignore log files
 *.log
+*.tmp
+*.swp
 
 # Ignore the node_modules directory
 /node_modules/
@@ -17,3 +20,14 @@
 *.tfstate
 *.tfstate.backup
 
+# Ignore Archive and Compressed Files
+*.zip
+*.rar
+*.tar.gz
+
+# Ignore Configuration and Enviroment Files
+*.env
+*.config
+
+# Ignore Generated Files
+*.generated
