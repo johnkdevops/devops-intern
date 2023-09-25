@@ -1,0 +1,19 @@
+# Ignore compiled binaries
+*.exe
+*.dll
+
+# Ignore log files
+*.log
+
+# Ignore the node_modules directory
+/node_modules/
+
+# Ignore all the files .tmp extension
+
+# Ignore all the files with .bak extension
+
+# Ignore terraform state files
+.terraform/*
+*.tfstate
+*.tfstate.backup
+
