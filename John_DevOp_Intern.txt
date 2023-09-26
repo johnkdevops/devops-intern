@@ -6,7 +6,7 @@
 
 ### Task instructions for DevOps Intern Role
 
-## Note: Running Docker & Kind on Centos Stream 9 VM running on Oracle VirtualBox 7.0 on my local desktop running Windows 10 Pro.
+## Note: Running Docker & Kind on Centos Stream 8.
 
 ## Prerequisites need to be installed:
 Docker
@@ -18,7 +18,7 @@ Git
 Nodejs
 NPM
 Express
-## Must have root permissions on the VM by running sudo su - !!!
+## Must have root permissions on the Centos8 Stream PC by running sudo su - !!!
 
 ## I. Setup a kubernetes cluster using kind
 
