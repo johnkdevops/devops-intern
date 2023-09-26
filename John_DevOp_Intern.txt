@@ -274,14 +274,9 @@ resource "helm_release" "kube-prometheus-stack" {
   chart = "prometheus-community/kube-prometheus-stack"
   repository = "https://prometheus-community.github.io/helm-charts"
   version = "~>12.8.0"
-
-  values = {
-    serviceMonitorSelector = {
-      matchLabels = {
-        app = "my-application"
-      }
-    }
-  }
+  values = [
+  "serviceMonitorSelector.matchLabels.app=my-application"
+  ]
 }
 
 ### Expose the nginx-proxy deployment on port 80.
