@@ -22,13 +22,20 @@ Express
 
 ## I. Setup a kubernetes cluster using kind
 
-1. To install kind:
+1. Install docker
+ a. sudo yum install -y yum-utils
+ b. sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+ c. sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+ d. Start docker run systemctl start docker
+ e. Verify that docker is up run systemctl status docker
+
+2. To install kind:
  a. curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
  b. chmod +x ./kind
  c. mv ./kind /usr/local/bin/kind
  d. Verify kind is installed run kind --version
 
-2. To install kubectl:
+3. To install kubectl:
  a. curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
  b. install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
  c. Verify kubectl is installed run kubectl version --client
@@ -46,7 +53,6 @@ Express
 # Define the variables
 cluster_name="cluster1"
 cluster_config="multi-node-config.yaml"
-
 
 # Create the KinD cluster with the control plane name
 kind create cluster --name="$cluster_name" --config="$cluster_config"
@@ -142,13 +148,6 @@ app.listen(port, () => {
 4. Verify that nodejs express app is up, open new terminal, and run http://localhost:3000
    Hello World!
 
-5. Install docker
- a. sudo yum install -y yum-utils
- b. sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
- c. sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
- d. Start docker run systemctl start docker
- e. Verify that docker is up run systemctl status docker
-
 ## A. When kind is up and running, dockerize a simple hello world express and deploy to dockerhub
  
  1. Create the dockerfile inside the app folder by running vi dockerfile
@@ -220,9 +219,10 @@ spec:
 ## C. using the kubectl terraform provider, write a terraform code to deploy the kubectl manifest to the kind cluster
 
 1. Install terraform:
- a. yum-config-manager --add-repo https://rpm.releases.hashicorp.com/$release/hashicorp.repo
- b. yum install -y terraform
- c. Verify terraform is installed by running terraform --version
+ a. wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
+ b. unzip terraform_1.5.7_linux_amd64.zip
+ c. sudo mv terraform /usr/local/bin/
+ d. Verify terraform is installed by running terraform --version
 
 2. Create terraform providers by running vi providers.tf
 
