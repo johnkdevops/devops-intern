@@ -244,6 +244,45 @@ resource "kubectl_manifest" "express-node-js-app" {
 2. Plan your terraform configuration by running terraform plan
 2. Apply the terraform file by running terraform apply --auto-approve
 
+# D. Verify the hellow-world-express-nodejs app was successfully deployed by running kubectl get deploy -o wide
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS           IMAGES                                   SELECTOR
+hello-world-deployment   1/1     1            1           30m   hello-world-nodejs   presjkit/hello-world-express-nodejs:v1   app=hello-world-deployment
+
+## 3. Using the kube-prometheus stack, using terraform helm provider, setup monitoring and observability for the prometheus cluster.
+
+# A. Install Helm 
+1. wget https://get.helm.sh/helm-v3.13.0-rc.1-linux-amd64.tar.gz
+2. tar -zxvf helm-v3.13.0-rc.1-linux-amd64.tar.gz
+3. mv linux-amd64/helm /usr/local/bin/helm
+
+# B. Add the Helm stable repository
+1. helm repo add stable https://charts.helm.sh/stable
+2. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+# C. Create Terraform configuration for kube-promethus stack
+
+# promethus.tf
+
+provider "helm" {
+  kubernetes {
+    host = kubernetes.config.host
+  }
+}
+
+resource "helm_release" "kube-prometheus-stack" {
+  name = "kube-prometheus-stack"
+  chart = "prometheus-community/kube-prometheus-stack"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  version = "~>12.8.0"
+
+  values = {
+    serviceMonitorSelector = {
+      matchLabels = {
+        app = "my-application"
+      }
+    }
+  }
+}
 
 ### Expose the nginx-proxy deployment on port 80.
 
