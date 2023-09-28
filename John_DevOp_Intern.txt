@@ -251,9 +251,10 @@ hello-world-deployment   1/1     1            1           30m   hello-world-node
 ## 3. Using the kube-prometheus stack, using terraform helm provider, setup monitoring and observability for the prometheus cluster.
 
 # A. Install Helm 
-1. wget https://get.helm.sh/helm-v3.13.0-rc.1-linux-amd64.tar.gz
-2. tar -zxvf helm-v3.13.0-rc.1-linux-amd64.tar.gz
-3. mv linux-amd64/helm /usr/local/bin/helm
+1. curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+2. chnmod 700 get_helm.sh 
+3. ./get_helm.sh
+4. helm version
 
 # B. Add the Helm stable repository
 1. helm repo add stable https://charts.helm.sh/stable
